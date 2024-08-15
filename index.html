@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ultimate Chaos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Ultimate Chaos!</h1>
+        <p>Click the buttons to unleash absolute pandemonium.</p>
+        <button onclick="addChaos()">Add Chaos</button>
+        <button onclick="removeChaos()">Remove Chaos</button>
+        <button onclick="changeBackground()">Change Background</button>
+        <button onclick="startChaos()">Start Continuous Chaos</button>
+        <button onclick="stopChaos()">Stop Continuous Chaos</button>
+        <button onclick="startSound()">Start Sound</button>
+        <button onclick="stopSound()">Stop Sound</button>
+        <button onclick="addTextChaos()">Add Text Chaos</button>
+        <button onclick="startTextChaos()">Start Continuous Text Chaos</button>
+        <button onclick="stopTextChaos()">Stop Continuous Text Chaos</button>
+        <button onclick="addMovingText()">Add Moving Text</button>
+        <button onclick="randomizeButtons()">Randomize Button Styles</button>
+        <button onclick="addParticles()">Add Particles</button>
+        <button onclick="startConfetti()">Start Confetti</button>
+        <button onclick="stopConfetti()">Stop Confetti</button>
+        <button onclick="addRandomShapes()">Add Random Shapes</button>
+        <button onclick="randomizeText()">Randomize Text</button>
+        <button onclick="startGlitch()">Start Glitch Effect</button>
+        <button onclick="stopGlitch()">Stop Glitch Effect</button>
+        <div id="chaos"></div>
+        <div id="text-chaos"></div>
+        <div id="moving-text"></div>
+        <div id="particles"></div>
+        <div id="confetti"></div>
+        <div id="shapes"></div>
+        <audio id="bg-sound" src="https://www.soundjay.com/button/beep-07.wav" loop></audio>
+        <div id="glitch"></div>
+    </div>
+    <script>
+        let chaosInterval;
+        let textChaosInterval;
+        let movingTextInterval;
+        let soundPlaying = false;
+        let textChaosRunning = false;
+        let confettiInterval;
+        let glitchInterval;
+
+        function addChaos() {
+            const chaosDiv = document.getElementById('chaos');
+            const chaosElement = document.createElement('div');
+            chaosElement.className = 'chaos-element';
+            chaosElement.style.left = Math.random() * 100 + 'vw';
+            chaosElement.style.top = Math.random() * 100 + 'vh';
+            chaosElement.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+            chaosElement.style.backgroundColor = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+            chaosElement.style.width = Math.random() * 150 + 'px';
+            chaosElement.style.height = Math.random() * 150 + 'px';
+            chaosElement.style.borderRadius = Math.random() * 50 + '%';
+            chaosElement.style.opacity = Math.random();
+            chaosElement.style.zIndex = Math.floor(Math.random() * 1000);
+            chaosElement.style.position = 'absolute';
+            chaosElement.style.animation = `moveChaos ${Math.random() * 5 + 2}s infinite linear, scaleChaos ${Math.random() * 5 + 2}s infinite alternate, blink ${Math.random() * 2 + 1}s infinite, skew ${Math.random() * 2 + 1}s infinite alternate, bounce ${Math.random() * 2 + 1}s infinite, colorChange ${Math.random() * 5 + 2}s infinite`;
+            chaosDiv.appendChild(chaosElement);
+        }
+
+        function removeChaos() {
+            const chaosDiv = document.getElementById('chaos');
+            chaosDiv.innerHTML = '';
+        }
+
+        function changeBackground() {
+            document.body.style.background = `linear-gradient(${Math.random() * 360}deg, hsl(${Math.random() * 360}, 100%, 50%), hsl(${Math.random() * 360}, 100%, 50%))`;
+        }
+
+        function startChaos() {
+            chaosInterval = setInterval(() => {
+                addChaos();
+                changeBackground();
+            }, 200);
+        }
+
+        function stopChaos() {
+            clearInterval(chaosInterval);
+        }
+
+        function startSound() {
+            const bgSound = document.getElementById('bg-sound');
+            if (!soundPlaying) {
+                bgSound.play();
+                soundPlaying = true;
+            }
+        }
+
+        function stopSound() {
+            const bgSound = document.getElementById('bg-sound');
+            if (soundPlaying) {
+                bgSound.pause();
+                bgSound.currentTime = 0;
+                soundPlaying = false;
+            }
+        }
+
+        function addTextChaos() {
+            const textChaosDiv = document.getElementById('text-chaos');
+            const textElement = document.createElement('div');
+            textElement.className = 'text-chaos';
+            textElement.textContent = 'Chaotic Text!';
+            textElement.style.left = Math.random() * 100 + 'vw';
+            textElement.style.top = Math.random() * 100 + 'vh';
+            textElement.style.fontSize = Math.random() * 50 + 'px';
+            textElement.style.color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+            textElement.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+            textElement.style.position = 'absolute';
+            textElement.style.animation = `moveChaos ${Math.random() * 5 + 2}s infinite linear, colorChange ${Math.random() * 5 + 2}s infinite alternate, skew ${Math.random() * 2 + 1}s infinite alternate`;
+            textChaosDiv.appendChild(textElement);
+        }
+
+        function startTextChaos() {
+            if (!textChaosRunning) {
+                textChaosInterval = setInterval(() => {
+                    addTextChaos();
+                }, 200);
+                textChaosRunning = true;
+            }
+        }
+
+        function stopTextChaos() {
+            clearInterval(textChaosInterval);
+            textChaosRunning = false;
+        }
+
+        function addMovingText() {
+            const movingTextDiv = document.getElementById('moving-text');
+            const movingText = document.createElement('div');
+            movingText.className = 'moving-text';
+            movingText.textContent = 'Moving Text!';
+            movingText.style.left = Math.random() * 100 + 'vw';
+            movingText.style.top = Math.random() * 100 + 'vh';
+            movingText.style.fontSize = Math.random() * 50 + 'px';
+            movingText.style.color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+            movingText.style.position = 'absolute';
+            movingText.style.animation = `moveText ${Math.random() * 10 + 5}s infinite linear, colorChange ${Math.random() * 5 + 2}s infinite alternate`;
+            movingTextDiv.appendChild(movingText);
+        }
+
+        function randomizeButtons() {
+            const buttons = document.querySelectorAll('button');
+            buttons.forEach(button => {
+                button.style.backgroundColor = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+                button.style.color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+                button.style.borderRadius = Math.random() * 50 + '%';
+                button.style.fontSize = Math.random() * 30 + 'px';
+                button.style.padding = Math.random() * 20 + 10 + 'px ' + Math.random() * 20 + 10 + 'px';
+                button.style.transform = `rotate(${Math.random() * 360}deg)`;
+            });
+        }
+
+        function addParticles() {
+            const particlesDiv = document.getElementById('particles');
+            for (let i = 0; i < 200; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.top = Math.random() * 100 + 'vh';
+                particle.style.backgroundColor = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+                particle.style.width = Math.random() * 15 + 'px';
+                particle.style.height = Math.random() * 15 + 'px';
+                particle.style.position = 'absolute';
+                particle.style.animation = `particleMove ${Math.random() * 5 + 2}s infinite`;
+                particlesDiv.appendChild(particle);
+            }
+        }
+
+        function startConfetti() {
+            confettiInterval = setInterval(() => {
+                const confettiDiv = document.getElementById('confetti');
+                for (let i = 0; i < 30; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + 'vw';
+                    confetti.style.top = Math.random() * 100 + 'vh';
+                    confetti.style.backgroundColor = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+                    confetti.style.width = Math.random() * 10 + 5 + 'px';
+                    confetti.style.height = Math.random() * 10 + 5 + 'px';
+                    confetti.style.position = 'absolute';
+                    confetti.style.animation = `confettiFall ${Math.random() * 3 + 2}s infinite`;
+                    confettiDiv.appendChild(confetti);
+                }
+            }, 500);
+        }
+
+        function stopConfetti() {
+            clearInterval(confettiInterval);
+            document.getElementById('confetti').innerHTML = '';
+        }
+
+        function addRandomShapes() {
+            const shapesDiv = document.getElementById('shapes');
+            for (let i = 0; i < 50; i++) {
+                const shape = document.createElement('div');
+                shape.className = 'random-shape';
+                shape.style.left = Math.random() * 100 + 'vw';
+                shape.style.top = Math.random() * 100 + 'vh';
+                shape.style.backgroundColor = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+                shape.style.width = Math.random() * 50 + 'px';
+                shape.style.height = Math.random() * 50 + 'px';
+                shape.style.position = 'absolute';
+                shape.style.borderRadius = Math.random() * 50 + '%';
+                shape.style.animation = `shapeMove ${Math.random() * 5 + 2}s infinite`;
+                shapesDiv.appendChild(shape);
+            }
+        }
+
+        function randomizeText() {
+            const texts = document.querySelectorAll('.text-chaos, .moving-text');
+            texts.forEach(text => {
+                text.style.fontSize = Math.random() * 50 + 'px';
+                text.style.color = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+                text.style.transform = 'rotate(' + (Math.random() * 360) + 'deg)';
+                text.style.animation = `moveChaos ${Math.random() * 5 + 2}s infinite linear, colorChange ${Math.random() * 5 + 2}s infinite alternate`;
+            });
+        }
+
+        function startGlitch() {
+            glitchInterval = setInterval(() => {
+                const glitchDiv = document.getElementById('glitch');
+                const glitchElement = document.createElement('div');
+                glitchElement.className = 'glitch';
+                glitchElement.style.left = Math.random() * 100 + 'vw';
+                glitchElement.style.top = Math.random() * 100 + 'vh';
+                glitchElement.style.width = '100px';
+                glitchElement.style.height = '100px';
+                glitchElement.style.position = 'absolute';
+                glitchElement.style.backgroundColor = 'hsl(' + Math.random() * 360 + ', 100%, 50%)';
+                glitchElement.style.animation = `glitchEffect ${Math.random() * 5 + 2}s infinite`;
+                glitchDiv.appendChild(glitchElement);
+            }, 200);
+        }
+
+        function stopGlitch() {
+            clearInterval(glitchInterval);
+            document.getElementById('glitch').innerHTML = '';
+        }
+    </script>
+</body>
+</html>

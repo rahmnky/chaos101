@@ -1,0 +1,166 @@
+body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #ff0000, #0000ff);
+    transition: background 0.5s ease;
+}
+
+.container {
+    position: relative;
+    text-align: center;
+    color: white;
+}
+
+h1 {
+    font-size: 5em;
+    margin: 20px 0;
+    animation: shake 1s infinite, colorChange 2s infinite alternate;
+}
+
+p {
+    font-size: 2em;
+    animation: colorChange 2s infinite alternate;
+}
+
+button {
+    font-size: 2em;
+    padding: 15px 30px;
+    border: none;
+    background-color: #ff0;
+    color: #000;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    animation: pulse 1.5s infinite;
+}
+
+button:hover {
+    background-color: #f00;
+    color: #fff;
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(255, 0, 0, 0.7);
+}
+
+button:active {
+    transform: scale(0.8);
+}
+
+#chaos {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+}
+
+.text-chaos {
+    position: absolute;
+    font-family: 'Comic Sans MS', cursive;
+    pointer-events: none;
+    animation: moveChaos 5s infinite linear, colorChange 3s infinite alternate, skew 2s infinite alternate;
+}
+
+.moving-text {
+    position: absolute;
+    font-family: 'Comic Sans MS', cursive;
+    animation: moveText 10s infinite linear, colorChange 5s infinite;
+}
+
+.particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: particleMove 5s infinite;
+}
+
+.confetti {
+    position: absolute;
+    border-radius: 50%;
+    animation: confettiFall 3s infinite;
+}
+
+.random-shape {
+    position: absolute;
+    animation: shapeMove 5s infinite;
+}
+
+.glitch {
+    position: absolute;
+    animation: glitchEffect 3s infinite;
+}
+
+@keyframes moveChaos {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(calc(100vw - 100px), calc(100vh - 100px)); }
+}
+
+@keyframes scaleChaos {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.5); }
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+@keyframes skew {
+    0% { transform: skew(0, 0); }
+    100% { transform: skew(20deg, 20deg); }
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-50px); }
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-15px); }
+    50% { transform: translateX(15px); }
+    75% { transform: translateX(-15px); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes colorChange {
+    0% { color: hsl(0, 100%, 50%); }
+    100% { color: hsl(360, 100%, 50%); }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.5); }
+    100% { transform: scale(1); }
+}
+
+@keyframes moveText {
+    0% { transform: translate(0, 0); }
+    100% { transform: translate(calc(100vw - 100px), calc(100vh - 100px)); }
+}
+
+@keyframes particleMove {
+    0% { transform: translateY(0); opacity: 1; }
+    50% { transform: translateY(-50px); opacity: 0.5; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes confettiFall {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(100vh); opacity: 0; }
+}
+
+@keyframes shapeMove {
+    0% { transform: rotate(0); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes glitchEffect {
+    0% { transform: translate(0, 0); }
+    25% { transform: translate(-10px, 0); }
+    50% { transform: translate(10px, 0); }
+    75% { transform: translate(-10px, 0); }
+    100% { transform: translate(0, 0); }
+}
